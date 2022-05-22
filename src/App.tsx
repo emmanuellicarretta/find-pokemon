@@ -31,12 +31,12 @@ const theme = createTheme({
     h2: {
       fontFamily: ['Roboto'].join(','),
       fontWeight: 700,
-      fontSize: 16,
+      fontSize: 24,
     },
     h3: {
       fontFamily: ['Roboto'].join(','),
       fontWeight: 600,
-      fontSize: 14,
+      fontSize: 18,
     },
   },
 });
