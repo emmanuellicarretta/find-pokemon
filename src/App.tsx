@@ -25,8 +25,8 @@ const theme = createTheme({
   typography: {
     h1: {
       fontFamily: ['Roboto'].join(','),
-      fontWeight: 400,
-      fontSize: 16,
+      fontWeight: 700,
+      fontSize: 30,
     },
     h2: {
       fontFamily: ['Roboto'].join(','),
