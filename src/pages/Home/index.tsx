@@ -1,8 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Card, Container, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TextField, Typography } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
-import { findPokemons, PokemonListItemResponse, PokemonListResponse } from "../../services/Pokemon";
+import {
+  Button,
+  Card,
+  Container,
+  Grid,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TablePagination,
+  TableRow,
+  Typography
+} from "@mui/material";
+import {
+  findPokemons,
+  PokemonListItemResponse,
+  PokemonListResponse
+} from "../../services/Pokemon";
 
 interface Column {
   id: 'url' | 'name' | 'details';
@@ -14,8 +32,8 @@ interface Column {
 
 const columns: readonly Column[] = [
   { id: 'url', label: 'Identificador', minWidth: 10 },
-  { id: 'name', label: 'Nome', minWidth: 90 },
-  { id: 'details', label: 'Ação', minWidth: 90 },
+  { id: 'name', label: 'Nome', minWidth: 70 },
+  { id: 'details', label: 'Ação', minWidth: 20 },
 ];
 
 interface Data {
@@ -64,7 +82,7 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div style={{ backgroundColor: "#B0E0E6", minHeight: "100vh" }}>
+    <div style={{ backgroundColor: "#FFD700", minHeight: "100vh" }}>
       <Container>
         <Card>
           <Grid container
@@ -72,19 +90,19 @@ const Home: React.FC = () => {
             flexDirection="row"
             justifyContent="center"
             alignItems="center"
-            sx={{ p: 5 }}
+            sx={{ p: "2rem" }}
           >
-            <Grid item textAlign="center" xs={12} sx={{ pt: 2 }}>
+            <Grid item textAlign="center" xs={12}>
               <Typography variant="h1">Vamos caçar pokemons?</Typography>
             </Grid>
 
-            <Grid container
+            {/* <Grid container
               display="flex"
               flexDirection="row"
               alignItems="center"
               justifyContent="center"
               textAlign="center"
-              sx={{ pb: 4, pt: 4 }}
+              sx={{ p: "2rem 1rem" }}
             >
               <Grid item xs={8}>
                 <TextField fullWidth label="Digite aqui o nome do pokemon ou o ID dele e pesquise" id="fullWidth" />
@@ -94,9 +112,9 @@ const Home: React.FC = () => {
                   <SearchIcon fontSize="large" style={{ color: "black" }} />
                 </Button>
               </Grid>
-            </Grid>
+            </Grid> */}
 
-            <Grid item xs={12}>
+            <Grid item xs={12} sx={{ pt: "2rem" }}>
               <Paper sx={{ width: '100%', overflow: 'hidden' }}>
                 <TableContainer sx={{ maxHeight: 440 }}>
                   <Table stickyHeader aria-label="sticky table">
@@ -121,7 +139,7 @@ const Home: React.FC = () => {
                               <TableCell>{row.url}</TableCell>
                               <TableCell>{row.name}</TableCell>
                               <TableCell>
-                                <Button onClick={() => { navigate('descricao') }}>
+                                <Button onClick={() => { navigate('../descricao') }}>
                                   Ver detalhes
                                 </Button>
                               </TableCell>
