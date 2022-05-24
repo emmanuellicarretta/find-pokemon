@@ -1,7 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card, CardContent, CardMedia, Grid, Typography } from "@mui/material";
+import { findDetailsPokemon, PokemonDetailsResponse } from "../../services/Pokemon";
 
 const Description: React.FC = () => {
+
+  const [details, setDetails] = useState<PokemonDetailsResponse>();
+
+  useEffect(() => {
+
+    const find = async () => {
+      const id = "1"
+      const pokemonDetails = await findDetailsPokemon(id);
+      setDetails(pokemonDetails);
+    };
+
+    find();
+  }, []);
+
 
   return (
     <div style={{ backgroundColor: "#2F4F4F", minHeight: "100vh" }}>
@@ -13,20 +28,20 @@ const Description: React.FC = () => {
         sx={{ pt: 10 }}
       >
         <Card>
-          <CardMedia
+          {/* <CardMedia
             background-color="red"
             component="img"
             width="1200"
             height="350"
-            image="/static/images/cards/contemplative-reptile.jpg"
+            image={details.sprite}
             alt="green iguana"
-          />
+          /> */}
           <CardContent>
             <Typography gutterBottom variant="h2" component="div">
-              Nome do Pokemon
+              {details?.name}
             </Typography>
             <Typography variant="h3" color="text.secondary">
-              Cor: x
+
             </Typography>
           </CardContent>
         </Card>
