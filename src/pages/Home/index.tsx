@@ -96,24 +96,6 @@ const Home: React.FC = () => {
               <Typography variant="h1">Vamos caçar pokemons?</Typography>
             </Grid>
 
-            {/* <Grid container
-              display="flex"
-              flexDirection="row"
-              alignItems="center"
-              justifyContent="center"
-              textAlign="center"
-              sx={{ p: "2rem 1rem" }}
-            >
-              <Grid item xs={8}>
-                <TextField fullWidth label="Digite aqui o nome do pokemon ou o ID dele e pesquise" id="fullWidth" />
-              </Grid>
-              <Grid item textAlign="left" xs={1}>
-                <Button>
-                  <SearchIcon fontSize="large" style={{ color: "black" }} />
-                </Button>
-              </Grid>
-            </Grid> */}
-
             <Grid item xs={12} sx={{ pt: "2rem" }}>
               <Paper sx={{ width: '100%', overflow: 'hidden' }}>
                 <TableContainer sx={{ maxHeight: 440 }}>
