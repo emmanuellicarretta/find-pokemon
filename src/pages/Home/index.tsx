@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
+import PageHome from "./styles";
 import { useNavigate } from "react-router-dom";
-import SearchIcon from '@mui/icons-material/Search';
 import {
   Button,
   Card,
@@ -82,7 +82,7 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div style={{ backgroundColor: "#FFD700", minHeight: "100vh" }}>
+    <PageHome>
       <Container>
         <Card>
           <Grid container
@@ -150,7 +150,7 @@ const Home: React.FC = () => {
           </Grid>
         </Card>
       </Container>
-    </div >
+    </PageHome >
   );
 };
 

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import PageDescription from "./styles";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -37,7 +38,7 @@ const Description: React.FC = () => {
   }, [pokemonId]);
 
   return (
-    <div style={{ backgroundColor: "#FFD700", minHeight: "100vh" }}>
+    <PageDescription>
 
       <Grid container alignItems="center">
 
@@ -102,7 +103,7 @@ const Description: React.FC = () => {
           </Button>
         </Grid>
       </Grid>
-    </div>
+    </PageDescription>
   );
 };
 
