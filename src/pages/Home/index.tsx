@@ -133,19 +133,24 @@ const Home: React.FC = () => {
                     </TableHead>
                     <TableBody>
                       {pokemons
-                        .map((row) => {
-                          return (
-                            <TableRow hover role="checkbox" tabIndex={-1} key={row.url}>
-                              <TableCell>{row.url}</TableCell>
-                              <TableCell>{row.name}</TableCell>
-                              <TableCell>
-                                <Button onClick={() => { navigate('../descricao') }}>
-                                  Ver detalhes
-                                </Button>
-                              </TableCell>
-                            </TableRow>
-                          );
-                        })}
+                        .map((row) =>
+                          <TableRow hover role="checkbox" tabIndex={-1} key={row.url}>
+                            <TableCell>{row.url}</TableCell>
+                            <TableCell>{row.name}</TableCell>
+                            <TableCell>
+                              <Button onClick={() => {
+                                navigate('../descricao', {
+                                  replace: true,
+                                  state: {
+                                    url: row.url
+                                  },
+                                })
+                              }}>
+                                Ver detalhes
+                              </Button>
+                            </TableCell>
+                          </TableRow>
+                        )}
                     </TableBody>
                   </Table>
                 </TableContainer>

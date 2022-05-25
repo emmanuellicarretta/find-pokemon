@@ -1,26 +1,40 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { Button, Card, CardContent, CardMedia, Grid, Typography } from "@mui/material";
 import { findDetailsPokemon, PokemonDetailsResponse } from "../../services/Pokemon";
 
+interface LocationState {
+  url: string;
+};
+
 const Description: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [details, setDetails] = useState<PokemonDetailsResponse>();
+  const { url } = location.state as LocationState;
+  const [pokemonId, setPokemonId] = useState<number>();
 
   useEffect(() => {
+    const getId = async () => {
+      const initialPosition = url.indexOf("pokemon/") + 8;
+      const finalPosition = url.length - 1;
+      const id = url.substring(initialPosition, finalPosition);
+      setPokemonId(+id);
+    };
+    getId();
+  }, [url]);
 
+  useEffect(() => {
     const find = async () => {
-      const id = "1"
-      const pokemonDetails = await findDetailsPokemon(id);
+      const pokemonDetails = await findDetailsPokemon(`${pokemonId}`);
       setDetails(pokemonDetails);
     };
-
-    find();
-  }, []);
-
+    if (pokemonId && pokemonId > 0)
+      find();
+  }, [pokemonId]);
 
   return (
     <div style={{ backgroundColor: "#FFD700", minHeight: "100vh" }}>
@@ -35,7 +49,10 @@ const Description: React.FC = () => {
         </Grid>
 
         <Grid item textAlign="right" xs={3}>
-          <Button style={{ color: "black" }} onClick={() => navigate('../inicio')} >
+          <Button style={{ color: "black" }} onClick={() => {
+            if (pokemonId && pokemonId > 1)
+              setPokemonId(pokemonId - 1)
+          }}>
             <ArrowBackIosNewIcon fontSize="large" />
             <Typography variant="h3" sx={{ pl: "0.5rem" }}>Pokemon anterior</Typography>
           </Button>
@@ -57,28 +74,29 @@ const Description: React.FC = () => {
             />
 
             <CardContent>
-
               <Typography gutterBottom variant="h2" component="div">
                 Nome: {details?.name}
               </Typography>
-              <Typography variant="h3" color="text.secondary">
-                {/* Slot: {details?.types.slot} */}
-              </Typography>
-              <Typography variant="h3" color="text.secondary">
-                {/* Tipo: {details?.types.type} */}
-              </Typography>
-              <Typography variant="h3" color="text.secondary">
-                {/* Nome: {details?.types.type.name} */}
-              </Typography>
-              <Typography variant="h3" color="text.secondary">
-                {/* Url: {details?.types.type.url} */}
-              </Typography>
+
+              {details?.types?.map(item =>
+              (<>
+                <Typography variant="h3" color="text.secondary">
+                  Slot: {item?.slot}
+                </Typography>
+                <Typography variant="h3" color="text.secondary">
+                  Tipo: {item?.type?.name}
+                </Typography>
+              </>)
+              )}
 
             </CardContent>
           </Card>
         </Grid>
         <Grid item xs={3}>
-          <Button style={{ color: "black" }} onClick={() => navigate('../inicio')} >
+          <Button style={{ color: "black" }} onClick={() => {
+            if (pokemonId)
+              setPokemonId(pokemonId + 1)
+          }}>
             <Typography variant="h3" sx={{ pr: "0.5rem" }}>Próximo pokemon</Typography>
             <ArrowForwardIosIcon fontSize="large" />
           </Button>
